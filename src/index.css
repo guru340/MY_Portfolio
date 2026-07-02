@@ -1,0 +1,83 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500;600&display=swap');
+@import "tailwindcss";
+
+@variant dark (&:where(.dark, .dark *));
+
+@theme {
+  --font-sans: "Inter", ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-serif: "Playfair Display", Georgia, "Times New Roman", serif;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  
+  --color-warm-beige: var(--warm-beige);
+  --color-warm-card: var(--warm-card);
+  --color-warm-border: var(--warm-border);
+  --color-nav-border: var(--nav-border);
+  --color-polish-dark: var(--polish-dark);
+}
+
+:root {
+  --warm-beige: #FFFFFF;
+  --warm-card: #FFFFFF;
+  --warm-border: #E5E3E0;
+  --nav-border: #DEDCD9;
+  --polish-dark: #2D2B28;
+  --dot-color: rgba(45, 43, 40, 0.04);
+  --scrollbar-thumb: #D4CEBF;
+}
+
+:root.dark {
+  --warm-beige: #0A0A0A;
+  --warm-card: #121212;
+  --warm-border: #222222;
+  --nav-border: #1A1A1A;
+  --polish-dark: #EAEAEA;
+  --dot-color: rgba(255, 255, 255, 0.03);
+  --scrollbar-thumb: #333333;
+}
+
+@layer base {
+  body {
+    background-color: var(--color-warm-beige);
+    color: var(--color-polish-dark);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+  }
+}
+
+/* Custom premium dotted grid pattern */
+.bg-dotted-grid {
+  background-size: 24px 24px;
+  background-image: radial-gradient(circle, var(--dot-color) 1px, transparent 1px);
+}
+
+/* Custom scrollbar styling for consistent minimalist design */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: var(--color-warm-beige);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--scrollbar-thumb);
+  border-radius: 9999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #A8A190;
+}
+
+/* Smooth typing text or custom styles */
+.text-serif-italic {
+  font-family: var(--font-serif);
+  font-style: italic;
+}
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+/* Hide scrollbar for IE, Edge and Firefox */
+.no-scrollbar {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
+

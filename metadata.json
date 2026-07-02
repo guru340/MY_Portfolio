@@ -1,0 +1,6 @@
+{
+  "name": "Software Engineer Portfolio",
+  "description": "A premium, minimalist single-page portfolio website for a Software Engineer with an editorial aesthetic, featuring a narrow centered layout, project showcase, experience timeline, stack grid with GitHub heatmap, currently reading card, and a polished design.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
