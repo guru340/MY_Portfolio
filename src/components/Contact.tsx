@@ -50,7 +50,7 @@ export default function Contact() {
     }
   }, []);
 
-  const calUsername = PERSONAL_INFO.socials.calcom || "gurusangwani06";
+  const calUsername = PERSONAx`L_INFO.socials.calcom || "gurusangwani06";
 
   return (
     <section className="py-12 border-b border-warm-border/60 scroll-mt-20" id="contact">

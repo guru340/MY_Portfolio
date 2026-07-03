@@ -16,7 +16,7 @@ export const PERSONAL_INFO = {
     linkedin: "https://www.linkedin.com/in/mayank-sangwani-164ab12a9/",
     email: "mailto:gurusangwani06@gmail.com",
     twitter: "https://x.com/MayankSang253",
-    calcom: (import.meta as any).env?.VITE_CALCOM_USERNAME || "guru340",
+    calcom: (import.meta as any).env?.VITE_CALCOM_USERNAME || "mayank-sangwani-yw1rhe",
     avatar: "https://avatars.githubusercontent.com/u/87940332?v=4"
   }
 };
