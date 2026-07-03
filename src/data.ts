@@ -21,7 +21,7 @@ export const PERSONAL_INFO = {
     avatar: "https://avatars.githubusercontent.com/u/87940332?v=4"
   }
 };
-
+//
 export const PROJECTS: Project[] = [
   {
     id: "aura-sync",
