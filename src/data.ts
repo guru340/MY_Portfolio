@@ -28,7 +28,7 @@ export const PROJECTS: Project[] = [
     year: "2025",
     description: "Developer-centric platform for managing projects, sharing code, and improving collaboration. write also in more detailed",
     longDescription: "A comprehensive developer collaboration platform that enables teams to manage software projects, organize development workflows, share code snippets and repositories, track progress, and collaborate efficiently in real time. Built with a modern full-stack architecture, it focuses on improving productivity, transparency, and communication throughout the software development lifecycle.",
-    image: "codeHarbour.png",
+    image: "D:\Portfolio\assets\.aistudio\Photo\codeHarbour.png",
     tech: ["Java 21", "Spring Boot", "WebFlux", "Docker", "React.js", "Spring Data JPA", "MySql"],
     githubUrl: "https://github.com/guru340/CodeHarbour.git",
     liveUrl: "https://codeharbour-dev.vercel.app/",
