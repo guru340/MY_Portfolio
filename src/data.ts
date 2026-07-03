@@ -1,4 +1,9 @@
 import { Project, ExperienceItem, BlogArticle, Book } from './types';
+import codeHarbourImg from "@/Photo/Code.png";
+import urlShortnerImg from "@/Photo/URL.png";
+import smartcvImg from "@/Photo/smartcv.png";
+import k72Img from "@/Photo/k72.png";
+import leetcodeImg from "@/Photo/Leetcode.png";
 
 
 export const PERSONAL_INFO = {
@@ -29,7 +34,7 @@ export const PROJECTS: Project[] = [
     year: "2025",
     description: "Developer-centric platform for managing projects, sharing code, and improving collaboration. write also in more detailed",
     longDescription: "A comprehensive developer collaboration platform that enables teams to manage software projects, organize development workflows, share code snippets and repositories, track progress, and collaborate efficiently in real time. Built with a modern full-stack architecture, it focuses on improving productivity, transparency, and communication throughout the software development lifecycle.",
-    image: "/Photo/Code.png",
+    image: codeHarbourImg ,
     tech: ["Java 21", "Spring Boot", "WebFlux", "Docker", "React.js", "Spring Data JPA", "MySql"],
     githubUrl: "https://github.com/guru340/CodeHarbour.git",
     liveUrl: "https://codeharbour-dev.vercel.app/",
@@ -42,7 +47,7 @@ export const PROJECTS: Project[] = [
     year: "2025",
     description: "A full-stack URL shortener that converts long URLs into compact, shareable links with fast redirection and a responsive interface.",
     longDescription: "A full-stack URL shortening application that converts long URLs into compact, shareable links with instant redirection. Built with a modern web stack, featuring REST APIs, persistent storage, and a responsive user interface.",
-    image: "urlShortner.png",
+    image: urlShortnerImg,
     tech: ["React", "Java", "Spring Boot", "Tailwind CSS"],
     githubUrl: "https://github.com/guru340/Url_Shortner.git",
     liveUrl: "https://url-shortner-ten-red.vercel.app/",
@@ -55,7 +60,7 @@ export const PROJECTS: Project[] = [
     year: "2026",
     description: "SmartCV AI is a full-stack AI-powered resume analysis and optimization platform that helps users improve their resumes using artificial intelligence.",
     longDescription: "SmartCV AI is a full-stack AI-powered resume analysis and optimization platform that helps users improve their resumes using artificial intelligence.",
-    image: "smartcv.png",
+    image: smartcvImg,
     tech: ["React", "Java", "Spring Boot", "Tailwind CSS","GroqAPI Key","SpringAI","RESTAPIs"],
     githubUrl: "https://github.com/guru340/SmartCV_AI.git",
     liveUrl: "https://smart-cv-ai-rho.vercel.app/",
@@ -68,7 +73,7 @@ export const PROJECTS: Project[] = [
     year: "2026",
     description: "A modern creative agency website inspired by K72, featuring smooth GSAP animations, responsive design, and a polished user experience built with React, Tailwind CSS, and Vite.",
     longDescription: "A modern creative agency website inspired by K72, featuring smooth GSAP animations, responsive design, and a polished user experience built with React, Tailwind CSS, and Vite.",
-    image: "k72.png",
+    image: k72Img,
     tech: ["React", "GSAP", "JavaScript", "Tailwind CSS"],
     githubUrl: "https://github.com/guru340/k72-Website.git",
     liveUrl: "https://k72-website-mu.vercel.app/",
@@ -81,7 +86,7 @@ export const PROJECTS: Project[] = [
     year: "2026",
     description: " A modern progress tracking dashboard that visualizes LeetCode performance with detailed statistics, problem-wise analytics, difficulty-based insights, and an intuitive interface to help developers monitor their coding journey and interview preparation.",
     longDescription: " A modern progress tracking dashboard that visualizes LeetCode performance with detailed statistics, problem-wise analytics, difficulty-based insights, and an intuitive interface to help developers monitor their coding journey and interview preparation.",
-    image: "Leetcode.png",
+    image: leetcodeImg,
     tech: ["React", "Shcdn UI", "JavaScript", "Tailwind CSS"],
     githubUrl: "https://github.com/guru340/Url_Shortner.git",
     liveUrl: "https://url-shortner-ten-red.vercel.app/",
