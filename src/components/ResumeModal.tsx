@@ -31,7 +31,7 @@ export default function ResumeModal({ isOpen, onClose }: ResumeModalProps) {
           <div className="flex items-center justify-between px-6 py-4 border-b border-warm-border dark:border-neutral-800/80 bg-warm-card dark:bg-neutral-900/40" id="resume-modal-header">
             <div className="flex items-center gap-2">
               <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse" />
-              <span className="font-sans text-xs font-bold text-gray-900 dark:text-white uppercase tracking-wider">Interactive Resume (TSX Mode)</span>
+              <span className="font-sans text-xs font-bold text-gray-900 dark:text-white uppercase tracking-wider">Resume</span>
             </div>
             
             <div className="flex items-center gap-3">

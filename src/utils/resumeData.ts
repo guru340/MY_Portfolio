@@ -65,7 +65,7 @@ export const resumeData: ResumeData = {
     {
       title: "SmartCV AI",
       subtitle: "Full Stack Web Application",
-      codeUrl: "https://github.com/gurusangwani06/SmartCV-AI",
+      codeUrl: "https://github.com/guru340/Url_Shortner.git",
       hasLive: true,
       bullets: [
         "Built a Smart Resume Analyzer using AI/NLP to calculate ATS score and suggest improvements.",
@@ -77,7 +77,7 @@ export const resumeData: ResumeData = {
     {
       title: "Fit Track AI",
       subtitle: "Full Stack Web Application",
-      codeUrl: "https://github.com/gurusangwani06/Fit-Track-AI",
+      codeUrl: "https://github.com/guru340/Fitneess-app-Microservices.git",
       hasLive: false,
       bullets: [
         "Built a scalable microservices-based fitness app using Spring Boot & Spring Cloud.",
