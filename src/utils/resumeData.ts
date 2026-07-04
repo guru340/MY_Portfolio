@@ -65,7 +65,7 @@ export const resumeData: ResumeData = {
     {
       title: "SmartCV AI",
       subtitle: "Full Stack Web Application",
-      codeUrl: "https://github.com/guru340/Url_Shortner.git",
+      codeUrl: "https://github.com/guru340/SmartCV_AI.git",
       hasLive: true,
       bullets: [
         "Built a Smart Resume Analyzer using AI/NLP to calculate ATS score and suggest improvements.",
