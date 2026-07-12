@@ -120,7 +120,8 @@ export default function App() {
         <Footer />
       </main>
       <BackToTop />
+       <Analytics />
     </div>
-     <Analytics />
+    
   );
 }
