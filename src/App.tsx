@@ -7,6 +7,7 @@ import Projects from './components/Projects';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
 import BackToTop from './components/BackToTop';
+import { Analytics } from '@vercel/analytics/react';
 
 export default function App() {
   const [activeSection, setActiveSection] = useState('about');
@@ -120,5 +121,6 @@ export default function App() {
       </main>
       <BackToTop />
     </div>
+     <Analytics />
   );
 }
