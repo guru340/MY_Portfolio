@@ -4,8 +4,9 @@ import urlShortnerImg from "@/Photo/URL.png";
 import smartcvImg from "@/Photo/smartcv.png";
 import k72Img from "@/Photo/k72.png";
 import leetcodeImg from "@/Photo/Leetcode.png";
-import FittrackImg from "@/src/Photo/Fittrack.png";
-import ApplyNestImg from "@/src/Photo/ApplyNest.png";
+import FittrackImg from "@/Photo/Fittrack.png"
+import ApplyNestImg from "@/Photo/ApplyNest.png"
+
 
 
 export const PERSONAL_INFO = {
@@ -45,7 +46,7 @@ export const PROJECTS: Project[] = [
   }, 
   {
     id: "aura-sync",
-    title: "ApplyNest",
+    title: "ApplyNest-Microservice",
     year: "2026",
     description: "A job application tracking platform built to help users organize, manage, and monitor their job search in one place, with structured application records, status tracking, and an intuitive workflow for staying on top of interviews and opportunities.",
     longDescription: "ApplyNest is a streamlined job application management platform designed to simplify the entire job search process. It allows users to store and organize job listings, track application progress, manage interview stages, and maintain a clear record of companies, roles, deadlines, and follow-ups. Built with a modern full-stack architecture, the project focuses on productivity, clarity, and ease of use, helping users reduce manual tracking and stay organized throughout their career search journey.",
