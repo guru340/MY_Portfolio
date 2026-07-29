@@ -13,6 +13,11 @@ const skills = [
   "Junit"
 ];
 
+// Single source of truth for the fallback username, used everywhere in this
+// component (fetches, avatar placeholder, handle link) so they never drift
+// out of sync with each other again.
+const DEFAULT_GITHUB_USERNAME = 'guru340';
+
 interface GitHubProfile {
   avatarUrl: string;
   name: string;
@@ -30,6 +35,8 @@ export default function About() {
     x: number;
     y: number;
   } | null>(null);
+
+  const githubUsername = (PERSONAL_INFO.socials as any).githubUsername || DEFAULT_GITHUB_USERNAME;
 
   const [profile, setProfile] = useState<GitHubProfile>({
     avatarUrl: '',
@@ -115,8 +122,6 @@ export default function About() {
   }, [contributionData]);
 
   useEffect(() => {
-    const githubUsername = (PERSONAL_INFO.socials as any).githubUsername || 'gurusangwani06';
-
     // Fetch live user profile
     fetch(`https://api.github.com/users/${githubUsername}`)
       .then(res => {
@@ -137,38 +142,20 @@ export default function About() {
         console.warn('Could not load live GitHub profile, using default context.', err);
       });
 
-    // Fetch live contribution calendar
-    fetch(`https://github-contributions-api.deno.dev/${githubUsername}.json`)
+    // Fetch live contribution calendar from our own Vercel API route
+    // (/api/contributions.js), which calls GitHub's official GraphQL API
+    // server-side. This replaces the old dependency on a third-party
+    // deno.dev proxy that was returning 404s.
+    fetch(`/api/contributions?username=${githubUsername}`)
       .then(res => {
         if (!res.ok) throw new Error('Contributions fetch failed');
         return res.json();
       })
       .then(apiData => {
-        if (apiData && Array.isArray(apiData.contributions)) {
-          const apiDataMap = new Map<string, { count: number; level: number }>();
-          const flatContributions = apiData.contributions.flat();
-          
-          flatContributions.forEach((c: any) => {
-            if (c && c.date) {
-              const dStr = c.date.split('T')[0];
-              const levelMap: Record<string, number> = {
-                'NONE': 0,
-                'FIRST_QUARTILE': 1,
-                'SECOND_QUARTILE': 2,
-                'THIRD_QUARTILE': 3,
-                'FOURTH_QUARTILE': 4
-              };
-              const lvl = typeof c.contributionLevel === 'number' 
-                ? c.contributionLevel 
-                : (levelMap[c.contributionLevel] || 0);
-              
-              apiDataMap.set(dStr, { 
-                count: typeof c.contributionCount === 'number' 
-                  ? c.contributionCount 
-                  : (c.count || 0), 
-                level: lvl 
-              });
-            }
+        if (apiData && Array.isArray(apiData.days)) {
+          const apiDataMap = new Map<string, number>();
+          apiData.days.forEach((d: { date: string; count: number }) => {
+            apiDataMap.set(d.date, d.count);
           });
 
           const alignedData = [];
@@ -183,23 +170,23 @@ export default function About() {
             date.setDate(startDate.getDate() + i);
             const dayOfWeek = date.getDay();
             const dateStr = date.toISOString().split('T')[0];
-            const realDay = apiDataMap.get(dateStr);
+            const count = apiDataMap.get(dateStr) ?? 0;
 
-            if (realDay) {
-              alignedData.push({
-                date,
-                count: realDay.count,
-                level: realDay.level,
-                dayOfWeek
-              });
-            } else {
-              alignedData.push({
-                date,
-                count: 0,
-                level: 0,
-                dayOfWeek
-              });
-            }
+            // Derive a 0-4 level from the raw count using rough GitHub-style
+            // quartile bands (GitHub itself scales bands per-user, but this
+            // gives a visually reasonable approximation).
+            let level = 0;
+            if (count > 0 && count <= 3) level = 1;
+            else if (count <= 6) level = 2;
+            else if (count <= 9) level = 3;
+            else if (count > 9) level = 4;
+
+            alignedData.push({
+              date,
+              count,
+              level,
+              dayOfWeek
+            });
           }
 
           // Check if total fetched contributions are 0. If so, fallback to mock data so it doesn't look empty/blank
@@ -217,7 +204,7 @@ export default function About() {
         console.warn('Could not load live GitHub contributions, keeping mock data.', err);
         setLoading(false);
       });
-  }, []);
+  }, [githubUsername]);
 
 
   // Compute month labels aligned with column indices
@@ -349,7 +336,7 @@ export default function About() {
                     />
                   ) : (
                     <div className="w-10 h-10 rounded-full bg-neutral-100 dark:bg-neutral-800 border border-warm-border shrink-0 flex items-center justify-center text-xs font-bold text-gray-400 select-none" id="github-avatar-placeholder">
-                      {((PERSONAL_INFO.socials as any).githubUsername || 'gurusangwani06')[0].toUpperCase()}
+                      {githubUsername[0].toUpperCase()}
                     </div>
                   )}
                   <div className="flex flex-col gap-0.5">
@@ -364,7 +351,7 @@ export default function About() {
                         className="text-[10px] font-mono text-emerald-600 dark:text-emerald-400 hover:underline leading-none flex items-center gap-0.5"
                         id="github-handle-link"
                       >
-                        @{((PERSONAL_INFO.socials as any).githubUsername || 'gurusangwani06')}
+                        @{githubUsername}
                       </a>
                     </div>
                     <p className="text-xs text-gray-500 dark:text-neutral-400 font-sans" id="github-bio">
