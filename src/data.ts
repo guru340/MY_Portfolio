@@ -4,6 +4,8 @@ import urlShortnerImg from "@/Photo/URL.png";
 import smartcvImg from "@/Photo/smartcv.png";
 import k72Img from "@/Photo/k72.png";
 import leetcodeImg from "@/Photo/Leetcode.png";
+import FittrackImg from "@/src/Photo/Fittrack.png";
+import ApplyNestImg from "@/src/Photo/ApplyNest.png";
 
 
 export const PERSONAL_INFO = {
@@ -28,6 +30,32 @@ export const PERSONAL_INFO = {
 };
 
 export const PROJECTS: Project[] = [
+   {
+    id: "aura-sync",
+    title: "FitTrack_AI-Microservice",
+    year: "2026",
+    description: "A production-oriented fitness management platform built with Spring Boot microservices and Spring Cloud, designed to deliver scalable user, workout, and nutrition management with centralized configuration, service discovery, and gateway-based routing.",
+    longDescription:  "FitTrack_AI-Microservice is a comprehensive cloud-native fitness platform developed using a microservices architecture. The system separates core business capabilities into independently deployable services, improving scalability, fault tolerance, and maintainability. It demonstrates modern backend engineering practices such as centralized configuration management, service discovery with Eureka, API gateway routing, RESTful service communication, and data persistence with JPA and Hibernate. The project is built to simulate enterprise-grade backend development and is well suited for managing fitness users, workout plans, nutrition data, and related application workflows in a modular and scalable way.",
+    image: FittrackImg ,
+    tech: ["Java", "Kubernetes", "Docker", "AWS EKS", "SpringBoot","Microservices","Kafka","Oauth2","React","MongoDb","PostgreSql","Spring AI"],
+    githubUrl: "https://github.com/guru340/Fitneess-app-Microservices.git",
+    liveUrl: "https://fitneess-app-microservices.vercel.app",
+    featured: true,
+    metrics: ["Microservices architecture", "Centralized config & discovery", "Scalable API routing"]
+  }, 
+  {
+    id: "aura-sync",
+    title: "ApplyNest",
+    year: "2026",
+    description: "A job application tracking platform built to help users organize, manage, and monitor their job search in one place, with structured application records, status tracking, and an intuitive workflow for staying on top of interviews and opportunities.",
+    longDescription: "ApplyNest is a streamlined job application management platform designed to simplify the entire job search process. It allows users to store and organize job listings, track application progress, manage interview stages, and maintain a clear record of companies, roles, deadlines, and follow-ups. Built with a modern full-stack architecture, the project focuses on productivity, clarity, and ease of use, helping users reduce manual tracking and stay organized throughout their career search journey.",
+    image: ApplyNestImg ,
+    tech: ["Java 21", "Spring Boot",  "Docker","Spring Cloud","Kubernetes" ,"Aws EKS","Zipkin","Rabbitmq","React.js", "Spring Data JPA", "Postgresql"],
+    githubUrl: "https://github.com/guru340/Job-Application.git",
+    liveUrl: "https://job-application-umber.vercel.app/",
+    featured: true,
+    metrics: ["Application tracking workflow", "Organized job pipeline", "Clean REST architecture"]
+  },
   {
     id: "aura-sync",
     title: "CodeHarbour",
@@ -95,12 +123,12 @@ export const PROJECTS: Project[] = [
   },
   {
     id: "kube-guard",
-    title: "Fitness App Microservices",
+    title: "Nexus_AI",
     year: "2026",
-    description: "A production-oriented Fitness Management System built using Spring Boot Microservices and Spring Cloud, following modern cloud-native architecture principles. The project demonstrates how enterprise applications can be designed as independently deployable services with centralized configuration, service discovery, API gateway routing, and scalable RESTful APIs.",
-    tech: ["Java", "Kubernetes", "Docker", "AWS EKS", "SpringBoot","Microservices","Kafka","Oauth2","React","MongoDb","PostgreSql","Spring AI"],
-    githubUrl: "https://github.com/guru340/Fitneess-app-Microservices.git",
-    liveUrl: "https://github.com/guru340/Fitneess-app-Microservices.git",
+    description: "A production-oriented AI-powered microservices platform built with Spring Boot, Spring Cloud, and cloud-native infrastructure, designed for scalable service orchestration, secure communication, and modular backend development.",
+    tech: ["Java", "Docker", "SpringBoot","React","MongoDb","Spring AI","WebSocket"],
+    githubUrl: "https://github.com/guru340/Nexus_AI.git",
+    liveUrl: "https://github.com/guru340/Nexus_AI.git",
     featured: false
   },
   {
