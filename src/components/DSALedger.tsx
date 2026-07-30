@@ -252,10 +252,10 @@ export default function DSALedger() {
 
                         const colorClass =
                           dayData.level === 0 ? 'bg-[#ebedf0] dark:bg-[#161b22] border border-gray-200/10 dark:border-neutral-800/50' :
-                          dayData.level === 1 ? 'bg-amber-200 dark:bg-amber-950' :
-                          dayData.level === 2 ? 'bg-amber-400 dark:bg-amber-800' :
-                          dayData.level === 3 ? 'bg-amber-500 dark:bg-amber-600' :
-                          'bg-amber-600 dark:bg-amber-400';
+                          dayData.level === 1 ? 'bg-[#9be9a8] dark:bg-[#0e4429]' :
+                          dayData.level === 2 ? 'bg-[#40c463] dark:bg-[#006d32]' :
+                          dayData.level === 3 ? 'bg-[#30a14e] dark:bg-[#26a641]' :
+                          'bg-[#216e39] dark:bg-[#39d353]';
 
                         return (
                           <div
