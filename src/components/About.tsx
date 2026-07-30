@@ -16,7 +16,7 @@ const skills = [
 // Single source of truth for the fallback username, used everywhere in this
 // component (fetches, avatar placeholder, handle link) so they never drift
 // out of sync with each other again.
-const DEFAULT_GITHUB_USERNAME = 'guru340';
+const DEFAULT_GITHUB_USERNAME = 'gurusangwani06';
 
 interface GitHubProfile {
   avatarUrl: string;
@@ -176,10 +176,11 @@ export default function About() {
             // quartile bands (GitHub itself scales bands per-user, but this
             // gives a visually reasonable approximation).
             let level = 0;
-            if (count > 0 && count <= 3) level = 1;
+            if (count === 0) level = 0;
+            else if (count <= 3) level = 1;
             else if (count <= 6) level = 2;
             else if (count <= 9) level = 3;
-            else if (count > 9) level = 4;
+            else level = 4;
 
             alignedData.push({
               date,
