@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import { motion } from 'motion/react';
-import { Star, Trophy, Award } from 'lucide-react';
+import { Star, Trophy, Award, Info, ChevronDown } from 'lucide-react';
 
 const LEETCODE_USERNAME = 'gurusangwani06';
 
@@ -114,6 +114,26 @@ export default function DSALedger() {
     return labels;
   }, [calendarData]);
 
+  const { totalSubmissions, totalActiveDays, maxStreak } = useMemo(() => {
+    let total = 0;
+    let activeDays = 0;
+    let currentStreak = 0;
+    let longestStreak = 0;
+
+    calendarData.forEach((day) => {
+      total += day.count;
+      if (day.count > 0) {
+        activeDays += 1;
+        currentStreak += 1;
+        longestStreak = Math.max(longestStreak, currentStreak);
+      } else {
+        currentStreak = 0;
+      }
+    });
+
+    return { totalSubmissions: total, totalActiveDays: activeDays, maxStreak: longestStreak };
+  }, [calendarData]);
+
   const handleMouseEnter = (e: React.MouseEvent<HTMLDivElement>, day: DayData) => {
     const cell = e.currentTarget;
     setHoveredDay({
@@ -218,67 +238,92 @@ export default function DSALedger() {
           </div>
         </div>
 
-        {/* Live Submission Heatmap */}
+        {/* Live Submission Heatmap — styled like LeetCode's own dark widget */}
         <div className="flex flex-col gap-3 border-t border-warm-border/40 pt-5" id="leetcode-heatmap-section">
           <span className="text-[10px] font-mono text-gray-400 uppercase tracking-wider">Submission Activity</span>
-          <div className="relative w-full overflow-x-auto select-none pb-2 scrollbar-thin" id="leetcode-heatmap-scroll">
-            <div className="flex gap-[3px] min-w-max relative py-1" id="leetcode-heatmap-inner">
-              <div className="flex flex-col gap-[3px] text-[8px] font-mono text-gray-400 w-5 shrink-0 justify-between select-none pr-1 mt-4">
-                <span className="h-[10px] leading-none flex items-center"></span>
-                <span className="h-[10px] leading-none flex items-center">M</span>
-                <span className="h-[10px] leading-none flex items-center"></span>
-                <span className="h-[10px] leading-none flex items-center">W</span>
-                <span className="h-[10px] leading-none flex items-center"></span>
-                <span className="h-[10px] leading-none flex items-center">F</span>
-                <span className="h-[10px] leading-none flex items-center"></span>
+
+          <div className="bg-[#1a1e26] rounded-2xl p-5 flex flex-col gap-4" id="leetcode-heatmap-dark-card">
+            {/* Header row */}
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+              <div className="flex items-center gap-2 text-white">
+                <span className="text-lg font-bold">{totalSubmissions.toLocaleString()}</span>
+                <span className="text-sm text-neutral-400">submissions in the past one year</span>
+                <Info className="w-3.5 h-3.5 text-neutral-500" />
               </div>
-
-              <div className="flex flex-col gap-1">
-                <div className="flex gap-[3px] text-[9px] font-mono text-gray-400 h-3 relative select-none">
-                  {weekMonths.map((month, idx) => (
-                    <div key={idx} className="w-[10px] shrink-0 relative">
-                      {month && <span className="absolute left-0 top-0 text-[9px] text-gray-400 whitespace-nowrap select-none">{month}</span>}
-                    </div>
-                  ))}
-                </div>
-
-                <div className="flex gap-[3px]">
-                  {Array.from({ length: 53 }).map((_, weekIdx) => (
-                    <div key={weekIdx} className="flex flex-col gap-[3px] shrink-0">
-                      {Array.from({ length: 7 }).map((_, dayIdx) => {
-                        const dataIndex = weekIdx * 7 + dayIdx;
-                        const dayData = calendarData[dataIndex];
-                        if (!dayData) return <div key={dayIdx} className="w-[10px] h-[10px] rounded-[2.5px] bg-transparent shrink-0" />;
-
-                        const colorClass =
-                          dayData.level === 0 ? 'bg-[#ebedf0] dark:bg-[#161b22] border border-gray-200/10 dark:border-neutral-800/50' :
-                          dayData.level === 1 ? 'bg-[#9be9a8] dark:bg-[#0e4429]' :
-                          dayData.level === 2 ? 'bg-[#40c463] dark:bg-[#006d32]' :
-                          dayData.level === 3 ? 'bg-[#30a14e] dark:bg-[#26a641]' :
-                          'bg-[#216e39] dark:bg-[#39d353]';
-
-                        return (
-                          <div
-                            key={dayIdx}
-                            onMouseEnter={(e) => handleMouseEnter(e, dayData)}
-                            onMouseLeave={() => setHoveredDay(null)}
-                            className={`w-[10px] h-[10px] rounded-[2.5px] transition-all duration-100 shrink-0 hover:scale-120 cursor-pointer ${colorClass}`}
-                          />
-                        );
-                      })}
-                    </div>
-                  ))}
+              <div className="flex items-center gap-5">
+                <span className="text-xs text-neutral-400">
+                  Total active days: <span className="text-white font-semibold">{totalActiveDays}</span>
+                </span>
+                <span className="text-xs text-neutral-400">
+                  Max streak: <span className="text-white font-semibold">{maxStreak}</span>
+                </span>
+                <div className="flex items-center gap-1 bg-[#282d38] text-neutral-300 text-xs px-2.5 py-1 rounded-md">
+                  Current
+                  <ChevronDown className="w-3 h-3" />
                 </div>
               </div>
+            </div>
 
-              {hoveredDay && (
-                <div
-                  className="absolute z-30 bg-gray-900 text-white text-[9px] font-mono py-1 px-2 rounded-md shadow-md pointer-events-none whitespace-nowrap -translate-x-1/2 -translate-y-[130%] transition-all duration-75"
-                  style={{ left: `${hoveredDay.x}px`, top: `${hoveredDay.y}px` }}
-                >
-                  <span className="font-bold">{hoveredDay.count} submission{hoveredDay.count !== 1 ? 's' : ''}</span> on {hoveredDay.date.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}
+            {/* Grid */}
+            <div className="relative w-full overflow-x-auto select-none pb-1 scrollbar-thin" id="leetcode-heatmap-scroll">
+              <div className="flex gap-[3px] min-w-max relative py-1" id="leetcode-heatmap-inner">
+                <div className="flex flex-col gap-[3px] text-[8px] font-mono text-neutral-500 w-5 shrink-0 justify-between select-none pr-1 mt-4">
+                  <span className="h-[10px] leading-none flex items-center"></span>
+                  <span className="h-[10px] leading-none flex items-center">M</span>
+                  <span className="h-[10px] leading-none flex items-center"></span>
+                  <span className="h-[10px] leading-none flex items-center">W</span>
+                  <span className="h-[10px] leading-none flex items-center"></span>
+                  <span className="h-[10px] leading-none flex items-center">F</span>
+                  <span className="h-[10px] leading-none flex items-center"></span>
                 </div>
-              )}
+
+                <div className="flex flex-col gap-1">
+                  <div className="flex gap-[3px] text-[9px] font-mono text-neutral-500 h-3 relative select-none">
+                    {weekMonths.map((month, idx) => (
+                      <div key={idx} className="w-[10px] shrink-0 relative">
+                        {month && <span className="absolute left-0 top-0 text-[9px] text-neutral-500 whitespace-nowrap select-none">{month}</span>}
+                      </div>
+                    ))}
+                  </div>
+
+                  <div className="flex gap-[3px]">
+                    {Array.from({ length: 53 }).map((_, weekIdx) => (
+                      <div key={weekIdx} className="flex flex-col gap-[3px] shrink-0">
+                        {Array.from({ length: 7 }).map((_, dayIdx) => {
+                          const dataIndex = weekIdx * 7 + dayIdx;
+                          const dayData = calendarData[dataIndex];
+                          if (!dayData) return <div key={dayIdx} className="w-[10px] h-[10px] rounded-[2.5px] bg-transparent shrink-0" />;
+
+                          const colorClass =
+                            dayData.level === 0 ? 'bg-[#2d333b]' :
+                            dayData.level === 1 ? 'bg-[#0e4429]' :
+                            dayData.level === 2 ? 'bg-[#006d32]' :
+                            dayData.level === 3 ? 'bg-[#26a641]' :
+                            'bg-[#39d353]';
+
+                          return (
+                            <div
+                              key={dayIdx}
+                              onMouseEnter={(e) => handleMouseEnter(e, dayData)}
+                              onMouseLeave={() => setHoveredDay(null)}
+                              className={`w-[10px] h-[10px] rounded-[2.5px] transition-all duration-100 shrink-0 hover:scale-120 cursor-pointer ${colorClass}`}
+                            />
+                          );
+                        })}
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                {hoveredDay && (
+                  <div
+                    className="absolute z-30 bg-black text-white text-[9px] font-mono py-1 px-2 rounded-md shadow-md pointer-events-none whitespace-nowrap -translate-x-1/2 -translate-y-[130%] transition-all duration-75"
+                    style={{ left: `${hoveredDay.x}px`, top: `${hoveredDay.y}px` }}
+                  >
+                    <span className="font-bold">{hoveredDay.count} submission{hoveredDay.count !== 1 ? 's' : ''}</span> on {hoveredDay.date.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}
+                  </div>
+                )}
+              </div>
             </div>
           </div>
         </div>
